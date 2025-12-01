@@ -1,0 +1,29 @@
+CREATE DATABASE premier_zone_app;
+
+create table player_stats(
+player_name varchar(100),
+nation varchar(50),
+position varchar(50),
+age integer,
+matches_played integer,
+starts integer,
+minutes_played float,
+goals float,
+assists float,
+penalties_scored float,
+yellow_cards float,
+red_cards float,
+expected_goals float,
+expected_assists float,
+team_name varchar(100)
+);
+
+SET client_encoding TO 'UTF8'; 
+
+\copy player_stats from 'C:\Users\manthan\IdeaProjects\premier-league-app\prem_stats.csv' delimiter ',' csv header;
+
+select * from player_stats;
+
+
+
+
