@@ -36,14 +36,28 @@ public class PlayerService {
 
     public List<Player> getPlayersByPosition(String searchText){
         return playerRepository.findAll().stream()
-                .filter(player -> player.getPos().toLowerCase().contains(searchText.toLowerCase()))
+                .filter(player -> filterNullRecordsByPosition(player, searchText))
                 .collect(Collectors.toList());
+    }
+
+    private boolean filterNullRecordsByPosition(Player player, String searchText){
+        if(player.getPos() != null)
+            return player.getPos().toLowerCase().contains(searchText.toLowerCase());
+
+        return false;
     }
 
     public List<Player> getPlayersByNation(String searchText){
         return playerRepository.findAll().stream()
-                .filter(player -> player.getNation().toLowerCase().contains(searchText.toLowerCase()))
+                .filter(player -> filterNullRecordsByNation(player, searchText))
                 .collect(Collectors.toList());
+    }
+
+    private boolean filterNullRecordsByNation(Player player, String searchText){
+        if(player.getNation() != null)
+            return player.getNation().toLowerCase().contains(searchText.toLowerCase());
+
+        return false;
     }
 
     public List<Player> getPlayersByTeamAndPosition(String team, String position){
